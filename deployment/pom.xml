@@ -21,7 +21,7 @@
             <artifactId>quarkus-rest-client-jackson-deployment</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.lodh.arte.quarkus</groupId>
+            <groupId>ch.lupogryph.quarkus</groupId>
             <artifactId>quarkus-actuator</artifactId>
             <version>${project.version}</version>
         </dependency>
