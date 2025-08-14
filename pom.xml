@@ -4,6 +4,7 @@
 
     <groupId>ch.lupogryph.quarkus</groupId>
     <artifactId>quarkus-actuator-parent</artifactId>
+    <version>999-SNAPSHOT</version>     
     <packaging>pom</packaging>
 
     <modules>
