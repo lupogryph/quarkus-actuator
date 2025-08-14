@@ -26,9 +26,9 @@ public class InstanceServiceTest {
     void testCreateRequest() throws UnknownHostException {
         var expected = new InstancesRequest(
                 "lo-actuator",
-                "http://localhost:19001/",
-                "http://localhost:19001/q",
-                "http://localhost:19001/q/health",
+                "http://localhost:9000/",
+                "http://localhost:9000/q",
+                "http://localhost:9000/q/health",
                 new Metadata(null));
 
         var req = instanceService.createRequest();
