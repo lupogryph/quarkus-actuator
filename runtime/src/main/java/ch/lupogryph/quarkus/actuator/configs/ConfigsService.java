@@ -19,7 +19,7 @@ import io.smallrye.config.ConfigMapping;
 @ApplicationScoped
 public class ConfigsService {
 
-    @ConfigProperty(name = "quarkus.application.name", defaultValue = "application")
+    @ConfigProperty(name = "quarkus.application.name", defaultValue = "quarkus-actuator")
     String applicationName;
 
     @Inject
