@@ -1,0 +1,12 @@
+quarkus:
+  arc:
+    test:
+      disable-application-lifecycle-observers: true
+  log:
+    category:
+      "ch.lupogryph.quarkus.actuator":
+        min-level: DEBUG
+        level: DEBUG
+lodh:
+  actuator:
+    local-address: localhost
