@@ -1,6 +1,6 @@
 package ch.lupogryph.quarkus.actuator.threaddump;
 
-import static com.lodh.arte.actuator.util.Headers.ACTUATOR_CONTENT_TYPE;
+import static ch.lupogryph.quarkus.actuator.util.Headers.ACTUATOR_CONTENT_TYPE;
 import static io.vertx.core.http.HttpMethod.GET;
 import static jakarta.ws.rs.core.HttpHeaders.CONTENT_TYPE;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
