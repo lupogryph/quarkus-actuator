@@ -43,7 +43,7 @@ import io.quarkus.vertx.http.runtime.management.ManagementInterfaceBuildTimeConf
 
 class ActuatorProcessor {
 
-    private static final String FEATURE = "lo-actuator";
+    private static final String FEATURE = "quarkus-actuator";
 
     @BuildStep
     FeatureBuildItem feature() {
@@ -107,7 +107,7 @@ class ActuatorProcessor {
                     .management()
                     .route("/q/actuator")
                     .handler(actuatorRecorder.actuator(actuatorConfig, managementConfig,
-                            hasDependency(outcome, "quarkus-cache"), hasDependency(outcome, "lo-quartz")))
+                            hasDependency(outcome, "quarkus-cache"), hasDependency(outcome, "quarkus-quartz")))
                     .build());
             routes.produce(nonApplicationRootPathBuildItem.routeBuilder()
                     .management()
