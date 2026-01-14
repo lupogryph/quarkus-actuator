@@ -7,6 +7,5 @@ quarkus:
       "ch.lupogryph.quarkus.actuator":
         min-level: DEBUG
         level: DEBUG
-lodh:
   actuator:
     local-address: localhost
