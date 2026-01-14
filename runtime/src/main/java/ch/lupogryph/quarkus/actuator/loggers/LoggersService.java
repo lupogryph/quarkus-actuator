@@ -10,13 +10,11 @@ public final class LoggersService {
 
     private static final LogContext logContext = LogContext.getLogContext();
 
-    private static final String[] levels = { "OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE" };
-
     private LoggersService() {
     }
 
     public static LoggersResponse getLoggers() {
-        return new LoggersResponse(levels, mapLoggers(), mapGroups());
+        return new LoggersResponse(mapLoggers(), mapGroups());
     }
 
     static SortedMap<String, Loggers> mapLoggers() {
@@ -42,10 +40,11 @@ public final class LoggersService {
         return new TreeMap<>();
     }
 
-    public static void setLogger(String name, LoggersRequest loggersRequest) {
+    public static Void setLogger(String name, LoggersRequest loggersRequest) {
         var logger = logContext.getLogger(name);
         var level = loggersRequest.configuredLevel().map(Level::parse).orElse(logger.getParent().getLevel());
         logger.setLevel(level);
+        return null;
     }
 
     public static String getEffectiveLogLevel(org.jboss.logmanager.Logger logger) {
