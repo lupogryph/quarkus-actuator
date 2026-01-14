@@ -27,6 +27,11 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-config-yaml</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-cache</artifactId>
+            <optional>true</optional>
+        </dependency>
       
         <!-- test -->
         <dependency>
