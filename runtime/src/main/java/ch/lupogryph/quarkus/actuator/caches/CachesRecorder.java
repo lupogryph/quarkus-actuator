@@ -1,6 +1,6 @@
 package ch.lupogryph.quarkus.actuator.caches;
 
-import static com.lodh.arte.actuator.util.Handler.handler;
+import static ch.lupogryph.quarkus.actuator.util.Handler.handler;
 import static io.vertx.core.http.HttpMethod.DELETE;
 import static io.vertx.core.http.HttpMethod.GET;
 
