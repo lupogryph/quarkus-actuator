@@ -1,6 +1,7 @@
 package ch.lupogryph.quarkus.actuator.configs;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -19,8 +20,11 @@ import io.smallrye.config.ConfigMapping;
 @ApplicationScoped
 public class ConfigsService {
 
-    @ConfigProperty(name = "quarkus.application.name", defaultValue = "quarkus-actuator")
+    @ConfigProperty(name = "quarkus.application.name", defaultValue = "application")
     String applicationName;
+
+    @ConfigProperty(name = "quarkus.actuator.configs.hide", defaultValue = ".*(?i)password.*,.*(?i)secret.*,.*(?i)key.*,.*(?i)token.*,.*(?i)credentials.*")
+    Set<String> hidePatterns;
 
     @Inject
     BeanManager beanManager;
@@ -62,8 +66,8 @@ public class ConfigsService {
         return object;
     }
 
-    public static String raw(String name) {
-        return ConfigProvider.getConfig().getConfigValue(name).getRawValue();
+    public String raw(String name) {
+        return hide(name) ? "******" : ConfigProvider.getConfig().getConfigValue(name).getRawValue();
     }
 
     public static String sourceName(String name) {
@@ -78,4 +82,9 @@ public class ConfigsService {
         return name.substring(prefix.length() + 1); // +1 for the dot
     }
 
+    public boolean hide(String name) {
+        return hidePatterns.stream().anyMatch(p -> Pattern.matches(p, name));
+    }
+
 }
+
