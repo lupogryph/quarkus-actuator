@@ -1,6 +1,6 @@
 package ch.lupogryph.quarkus.actuator.admin;
 
-import static com.lodh.arte.actuator.util.Headers.ACTUATOR_CONTENT_TYPE;
+import static ch.lupogryph.quarkus.actuator.util.Headers.ACTUATOR_CONTENT_TYPE;
 import static io.vertx.core.http.HttpHeaders.CONTENT_TYPE;
 
 import java.net.UnknownHostException;
