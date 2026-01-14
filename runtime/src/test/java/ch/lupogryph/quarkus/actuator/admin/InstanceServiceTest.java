@@ -25,9 +25,9 @@ public class InstanceServiceTest {
     @Test
     void testCreateRequest() throws UnknownHostException {
         var expected = new InstancesRequest(
-                "lo-actuator",
+                "quarkus-actuator",
                 "http://localhost:9000/",
-                "http://localhost:9000/q",
+                "http://localhost:9000/q/actuator",
                 "http://localhost:9000/q/health",
                 new Metadata(null));
 
