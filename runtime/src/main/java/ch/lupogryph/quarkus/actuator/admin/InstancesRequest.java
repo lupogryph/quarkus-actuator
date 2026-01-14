@@ -20,9 +20,11 @@ public record InstancesRequest(
         this(
                 name,
                 url,
-                "%sq".formatted(url),
+                "%sq/actuator".formatted(url),
                 "%sq/health".formatted(url),
                 new Metadata(LocalDateTime.now()));
     }
+
+    public record Metadata(LocalDateTime startup) {}
 
 }
