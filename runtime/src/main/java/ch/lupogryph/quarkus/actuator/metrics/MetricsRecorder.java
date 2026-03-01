@@ -1,6 +1,6 @@
 package ch.lupogryph.quarkus.actuator.metrics;
 
-import static ch.lupogryph.quarkus.util.Handler.handler;
+import static ch.lupogryph.quarkus.actuator.util.Handler.handler;
 import static io.vertx.core.http.HttpMethod.GET;
 
 import java.util.Map;

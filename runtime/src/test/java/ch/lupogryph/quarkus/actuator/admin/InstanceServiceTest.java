@@ -26,10 +26,10 @@ public class InstanceServiceTest {
     void testCreateRequest() throws UnknownHostException {
         var expected = new InstancesRequest(
                 "quarkus-actuator",
-                "http://localhost:9000/",
-                "http://localhost:9000/q/actuator",
-                "http://localhost:9000/q/health",
-                new Metadata(null));
+                "http://localhost:9001/",
+                "http://localhost:9001/q/actuator",
+                "http://localhost:9001/q/health",
+                new InstancesRequest.Metadata(null));
 
         var req = instanceService.createRequest();
 

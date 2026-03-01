@@ -23,13 +23,13 @@ public class CachesServiceTest {
 
     @Test
     void cacheManagersTest() {
-        var cacheManagers = cachesService.allCaches().build();
+        var cacheManagers = cachesService.allCaches().build().toString();
         assertThat(cacheManagers).isNotBlank();
     }
 
     @Test
     void cacheTest() {
-        var res = cachesService.cache(CACHE_NAME).build();
+        var res = cachesService.cache(CACHE_NAME).build().toString();
         assertThat(res).isNotBlank().startsWith("""
                 {"target":"io.quarkus.cache.runtime.caffeine.CaffeineCacheImpl","name":"%s","cacheManager":"CacheManager_"""
                 .formatted(CACHE_NAME));

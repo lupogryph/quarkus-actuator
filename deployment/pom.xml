@@ -21,6 +21,14 @@
             <artifactId>quarkus-rest-client-jackson-deployment</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-micrometer-registry-prometheus-deployment</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-jsonp-deployment</artifactId>
+        </dependency>
+        <dependency>
             <groupId>ch.lupogryph.quarkus</groupId>
             <artifactId>quarkus-actuator</artifactId>
             <version>${project.version}</version>

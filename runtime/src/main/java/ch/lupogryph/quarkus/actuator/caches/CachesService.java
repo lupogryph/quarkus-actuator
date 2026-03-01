@@ -3,12 +3,13 @@ package ch.lupogryph.quarkus.actuator.caches;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.quarkus.cache.Cache;
 import io.quarkus.cache.CacheManager;
-import io.quarkus.vertx.http.runtime.devmode.Json;
 
 @ApplicationScoped
 public class CachesService {
@@ -18,36 +19,36 @@ public class CachesService {
     @Inject
     CacheManager cacheManager;
 
-    public Json.JsonObjectBuilder allCaches() {
-        var object = Json.object();
-        var cacheManagers = Json.object();
-        var caches = Json.object();
-        caches.put("caches", caches());
-        cacheManagers.put(cacheManager.getClass().getSimpleName(), caches);
-        object.put("cacheManagers", cacheManagers);
+    public JsonObjectBuilder allCaches() {
+        var object = Json.createObjectBuilder();
+        var cacheManagers = Json.createObjectBuilder();
+        var caches = Json.createObjectBuilder();
+        caches.add("caches", caches());
+        cacheManagers.add(cacheManager.getClass().getSimpleName(), caches);
+        object.add("cacheManagers", cacheManagers);
         return object;
     }
 
-    public Json.JsonObjectBuilder caches() {
-        var object = Json.object();
+    public JsonObjectBuilder caches() {
+        var object = Json.createObjectBuilder();
         cacheManager.getCacheNames().forEach(name -> {
-            cacheManager.getCache(name).ifPresent(cache -> object.put(name, target(cache)));
+            cacheManager.getCache(name).ifPresent(cache -> object.add(name, target(cache)));
         });
         return object;
     }
 
-    public Json.JsonObjectBuilder target(Cache cache) {
-        var object = Json.object();
-        object.put("target", cache.getClass().getCanonicalName());
+    public JsonObjectBuilder target(Cache cache) {
+        var object = Json.createObjectBuilder();
+        object.add("target", cache.getClass().getCanonicalName());
         return object;
     }
 
-    public Json.JsonObjectBuilder cache(String cacheName) {
-        var object = Json.object();
+    public JsonObjectBuilder cache(String cacheName) {
+        var object = Json.createObjectBuilder();
         cacheManager.getCache(cacheName).ifPresent(cache -> {
-            object.put("target", cache.getClass().getCanonicalName());
-            object.put("name", cacheName);
-            object.put("cacheManager", cacheManager.getClass().getSimpleName());
+            object.add("target", cache.getClass().getCanonicalName());
+            object.add("name", cacheName);
+            object.add("cacheManager", cacheManager.getClass().getSimpleName());
         });
         return object;
     }

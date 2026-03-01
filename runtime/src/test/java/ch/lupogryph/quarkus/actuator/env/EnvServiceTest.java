@@ -16,7 +16,7 @@ public class EnvServiceTest {
 
     @Test
     void testEnv() {
-        var env = service.env().build();
+        var env = service.env().build().toString();
         assertThat(env).isNotBlank();
     }
 

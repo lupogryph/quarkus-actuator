@@ -10,11 +10,12 @@ import jakarta.enterprise.inject.spi.Bean;
 import jakarta.enterprise.inject.spi.BeanManager;
 import jakarta.inject.Inject;
 
+import jakarta.json.Json;
+import jakarta.json.JsonObjectBuilder;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.ConfigProvider;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import io.quarkus.vertx.http.runtime.devmode.Json;
 import io.smallrye.config.ConfigMapping;
 
 @ApplicationScoped
@@ -29,40 +30,40 @@ public class ConfigsService {
     @Inject
     BeanManager beanManager;
 
-    public Json.JsonObjectBuilder contexts() {
-        var contexts = Json.object();
-        var application = Json.object();
-        application.put("beans", beans());
-        contexts.put(applicationName, application);
-        return Json.object().put("contexts", contexts);
+    public JsonObjectBuilder contexts() {
+        var contexts = Json.createObjectBuilder();
+        var application = Json.createObjectBuilder();
+        application.add("beans", beans());
+        contexts.add(applicationName, application);
+        return Json.createObjectBuilder().add("contexts", contexts);
     }
 
-    public Json.JsonObjectBuilder beans() {
-        var object = Json.object();
+    public JsonObjectBuilder beans() {
+        var object = Json.createObjectBuilder();
         Set<Class<?>> configClasses = beanManager.getBeans(Object.class).stream()
                 .map(Bean::getBeanClass)
                 .filter(clazz -> clazz.isAnnotationPresent(ConfigMapping.class))
                 .collect(Collectors.toSet());
         for (Class<?> configClass : configClasses) {
-            object.put(configClass.getName(), bean(configClass));
+            object.add(configClass.getName(), bean(configClass));
         }
         return object;
     }
 
-    public Json.JsonObjectBuilder bean(Class<?> configClass) {
-        var object = Json.object();
+    public JsonObjectBuilder bean(Class<?> configClass) {
+        var object = Json.createObjectBuilder();
         var prefix = prefix(configClass);
-        object.put("prefix", prefix);
-        object.put("properties", properties(prefix));
+        object.add("prefix", prefix);
+        object.add("properties", properties(prefix));
         return object;
     }
 
-    public Json.JsonObjectBuilder properties(String prefix) {
-        var object = Json.object();
+    public JsonObjectBuilder properties(String prefix) {
+        var object = Json.createObjectBuilder();
         Config config = ConfigProvider.getConfig();
         StreamSupport.stream(config.getPropertyNames().spliterator(), false)
                 .filter(name -> name.startsWith(prefix))
-                .forEach(name -> object.put(stripName(prefix, name), raw(name)));
+                .forEach(name -> object.add(stripName(prefix, name), raw(name)));
         return object;
     }
 
